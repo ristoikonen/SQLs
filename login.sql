@@ -1,7 +1,10 @@
+-- Create 'Users' table with data
+
 if exists (select * from sysobjects where id =
 object_id(N'[dbo].[Users]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
     drop table [dbo].[Users]
 GO
+    
 CREATE TABLE [dbo].[Users] ([uname] [varchar] (15) NOT NULL,
     [Pwd] [varchar] (25) NOT NULL,
     [userRole] [varchar] (25) NOT NULL,
