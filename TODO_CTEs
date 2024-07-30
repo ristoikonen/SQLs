@@ -1,0 +1,43 @@
+-- TODO's CTE templates
+
+DECLARE @id int = 3;
+
+WITH Factorial([todoid]
+      ,[name]
+      ,[details]
+      ,[dodate],[userid]) AS 
+(
+	  SELECT [todoid]
+      ,[name]
+      ,[details]
+      ,[dodate]
+      ,[userid]
+	  FROM dbo.Todo  
+     UNION ALL
+    	  SELECT [todoid]
+      ,[name]
+      ,[details]
+      ,[dodate]
+      ,[userid]
+	  FROM dbo.Todo  WHERE UserId = @id
+)
+SELECT [todoid]
+      ,[name]
+      ,[details]
+      ,[dodate]
+      ,[userid]
+	  ,LEAD(dodate, 1) OVER (
+		ORDER BY dodate
+	) AS next_dodate
+	, ROW_NUMBER() OVER (PARTITION BY UserId ORDER BY dodate) AS do_order
+  FROM Factorial 
+ WHERE [userid] = @id
+
+
+SELECT DATEDIFF(day,dodate,GETDATE() ) , DATENAME(WEEKDAY, dodate), * FROM dbo.Todo  WHERE UserId = @id
+
+SELECT DATENAME(WEEKDAY, dodate), * FROM dbo.Todo  
+WHERE DATEDIFF(day,dodate,GETDATE() ) = 0
+  
+
+
