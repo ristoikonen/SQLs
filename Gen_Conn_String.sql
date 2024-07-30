@@ -1,5 +1,3 @@
-
-
 -- Generate connection string from database the query is ran in
 
 select
