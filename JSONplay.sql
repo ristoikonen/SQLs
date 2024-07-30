@@ -1,4 +1,3 @@
-
 USE TODO
 
 DECLARE @json AS VARCHAR(MAX);
@@ -15,9 +14,6 @@ SELECT TOp 100
 FROM Todo
 FOR JSON PATH
 )
-
--- ratnik-2 body armour
--- what is aramic armour
 
 PRINT @json
 
